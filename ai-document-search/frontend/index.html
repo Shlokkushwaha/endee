@@ -1,0 +1,138 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<title>AI Document Search</title>
+</head>
+
+<body>
+
+<h2>AI Document Search</h2>
+
+<textarea id="doc" placeholder="Add document"></textarea>
+<br><br>
+
+<button onclick="addDoc()">Add Document</button>
+
+<hr>
+
+<input id="query" placeholder="Ask question">
+
+<button onclick="search()">Search</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+async function addDoc(){
+
+const text = document.getElementById("doc").value;
+
+await fetch("http://localhost:3000/add",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({text})
+});
+
+alert("Document added");
+}
+
+async function search(){
+
+const query = document.getElementById("query").value;
+
+const res = await fetch("http://localhost:3000/search",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({query})
+});
+
+const data = await res.json();
+
+document.getElementById("result").innerText=data.answer;
+}
+
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Document Semantic Search</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Document Semantic Search</h1>
+<p class="subtitle">Search documents using natural language queries</p>
+
+<div class="card">
+
+<h2>Add Document</h2>
+
+<textarea id="doc" placeholder="Paste your document here...(only text)"></textarea>
+
+<button onclick="addDoc()" class="btn add">Add Document</button>
+
+</div>
+
+<div class="card">
+
+<h2>Search</h2>
+
+<input id="query" placeholder="Ask something about the document...">
+
+<button onclick="search()" class="btn search">Search</button>
+
+</div>
+
+<div class="result-card">
+
+<h2>Result</h2>
+
+<div id="result">No results yet</div>
+
+</div>
+
+</div>
+
+<script>
+
+async function addDoc(){
+
+const text=document.getElementById("doc").value;
+
+await fetch("http://localhost:3000/add",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({text})
+});
+
+alert("Document Added Successfully!");
+
+}
+
+async function search(){
+
+const query=document.getElementById("query").value;
+
+const res = await fetch("http://localhost:3000/search",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({query})
+});
+
+const data = await res.json();
+
+document.getElementById("result").innerText=data.answer || data;
+
+}
+
+</script>
+
+</body>
+</html>
